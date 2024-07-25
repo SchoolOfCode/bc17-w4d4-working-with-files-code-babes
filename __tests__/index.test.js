@@ -1,10 +1,4 @@
-import {
-  test,
-  describe,
-  expect,
-  beforeAll,
-  afterEach,
-} from "@jest/globals";
+import { test, describe, expect, beforeAll, afterEach } from "@jest/globals";
 import fs from "node:fs";
 import * as uuid from "uuid";
 
@@ -26,7 +20,6 @@ afterEach(() => {
   fs.writeFileSync(fileName, "[]", { encoding: "utf8" });
 });
 
-
 describe("ticket 2b", () => {
   test("that getQuotes returns all quotes", async () => {
     const quoteText = "This is some random quote test";
@@ -42,9 +35,7 @@ describe("ticket 2c", () => {
     const quoteText = "Five four three two one";
     const result = await addQuote(quoteText);
     const result2 = await addQuote(quoteText);
-    const quotes = JSON.parse(
-      fs.readFileSync(fileName, { encoding: "utf8" })
-    );
+    const quotes = JSON.parse(fs.readFileSync(fileName, { encoding: "utf8" }));
     expect(result).toStrictEqual({
       id: expect.any(String),
       quoteText,
@@ -73,9 +64,7 @@ describe("ticket 2e", () => {
     const result2 = await addQuote(quoteText);
     const editedQuote = await editQuote(result.id, editedText);
     expect(editedQuote).toStrictEqual({ id: result.id, quoteText: editedText });
-    const quotes = JSON.parse(
-      fs.readFileSync(fileName, { encoding: "utf8" })
-    );
+    const quotes = JSON.parse(fs.readFileSync(fileName, { encoding: "utf8" }));
     expect(quotes).toStrictEqual([editedQuote, result2]);
   });
 
@@ -86,9 +75,7 @@ describe("ticket 2e", () => {
     const result2 = await addQuote(quoteText);
     const editedQuote = await editQuote("Not a real id", editedText);
     expect(editedQuote).toBeNull();
-    const quotes = JSON.parse(
-      fs.readFileSync(fileName, { encoding: "utf8" })
-    );
+    const quotes = JSON.parse(fs.readFileSync(fileName, { encoding: "utf8" }));
     expect(quotes).toStrictEqual([result, result2]);
   });
 });
@@ -100,9 +87,7 @@ describe("ticket 2f", () => {
     const result2 = await addQuote(quoteText);
     const deletedQuote = await deleteQuote(result.id);
     expect(deletedQuote).toStrictEqual(result);
-    const quotes = JSON.parse(
-      fs.readFileSync(fileName, { encoding: "utf8" })
-    );
+    const quotes = JSON.parse(fs.readFileSync(fileName, { encoding: "utf8" }));
     expect(quotes).toStrictEqual([result2]);
   });
 
@@ -112,9 +97,7 @@ describe("ticket 2f", () => {
     const result2 = await addQuote(quoteText);
     const deletedQuote = await deleteQuote("Not a real id");
     expect(deletedQuote).toBeNull();
-    const quotes = JSON.parse(
-      fs.readFileSync(fileName, { encoding: "utf8" })
-    );
+    const quotes = JSON.parse(fs.readFileSync(fileName, { encoding: "utf8" }));
     expect(quotes).toStrictEqual([result, result2]);
   });
 });
