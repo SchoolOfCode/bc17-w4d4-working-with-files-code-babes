@@ -8,7 +8,7 @@ async function getQuotes() {
     const data = await fs.readFile(fileName, 'utf8');
     console.log("File content:", data);  // Debug statement
     const quotes = JSON.parse(data);
-    console.log("Parsed quotes:", quotes);  // Debug statement
+    console.log("Parsed quotes:", quotes);  // Debug statement.
     return quotes;
   } catch (error) {
     console.error("Error reading the quotes file:", error);
