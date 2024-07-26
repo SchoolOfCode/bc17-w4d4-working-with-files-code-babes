@@ -29,13 +29,9 @@ async function addQuote(quoteText) {
     quotes.push(newQuote);
     console.log("Updated quotes:", quotes);  // Debug statement
 
-    await fs.writeFile(fileName, JSON.stringify(quotes, null, 2));
-    console.log("New file content:", JSON.stringify(quotes, null, 2));  // Debug statement
-
-    return newQuote;
+   // Save the updated quotes back to the file
+   await fs.writeFile(fileName, JSON.stringify(quotes, null, 2));
   } catch (error) {
-    console.error("Error adding a new quote:", error);
-    return null;
+    console.error("Error updating the quotes file:", error);
   }
 }
-
